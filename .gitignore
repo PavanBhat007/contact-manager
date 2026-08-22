@@ -36,3 +36,7 @@ htmlcov/
 # OS Generated Files
 .DS_Store
 Thumbs.db
+
+# DB
+database.db
+*.db

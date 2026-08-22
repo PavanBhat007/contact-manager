@@ -15,4 +15,4 @@ Smart Contact Directory with Intelligent Search functionality
 ## Next Milestones
 - Store contact avatars/images
 - User based contact management
-- Polish UI and make into usable product
+- Polish UI

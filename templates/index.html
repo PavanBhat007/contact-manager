@@ -1,0 +1,68 @@
+{% extends "layout.html" %} {% block title %} Home {% endblock %} {% block
+content %}
+<div class="page-container">
+    <div class="container">
+        <h3 class="section-title">Add New Contact</h3>
+        <form
+            class="contact-form"
+            method="POST"
+            action="{{ url_for('add_contact') }}"
+        >
+            <div class="input-field">
+                <label>Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter contact name" />
+            </div>
+            <div class="input-field">
+                <label>Phone</label>
+                <input type="text" id="phone" name="phone" placeholder="Enter contact number" />
+            </div>
+            <div class="input-field">
+                <label>Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter contact email" />
+            </div>
+
+            <button class="btn-submit" type="submit">Add to Contacts</button>
+        </form>
+    </div>
+
+    <div class="container">
+        <input
+            type="text"
+            id="searchbar"
+            name="searchbar"
+            class="searchbar"
+            placeholder="Search Contacts"
+        />
+    </div>
+
+    <div class="container">
+        <h3 class="section-title">Contacts</h3>
+        {% if numContacts == 0 %}
+        <p class="center-text null-msg">No Contacts added yet</p>
+        {% else %}
+        <div class="contacts-container">
+            <p class="section-subtitle">Total Contacts: {{ numContacts }}</p>
+            {% for contact in contacts %}
+            <div class="contact">
+                <div class="flex-col-container">
+                    <p class="contact-name">{{ contact.name }}</p>
+                    {% if contact.email %}
+                    <p class="contact-email">{{ contact.email }}</p>
+                    {% else %}
+                    <p class="contact-email null-msg">No Email</p>
+                    {% endif %}
+                </div>
+                <p class="contact-phone">{{ contact.phone }}</p>
+
+                <form method="POST" action="{{ url_for('delete_contact', id=contact.id) }}"
+                    onsubmit="return confirm('Delete contact: {{ contact.name }}?');"
+                >
+                    <button class="btn-delete" type="submit">X</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
