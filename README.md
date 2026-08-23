@@ -4,7 +4,7 @@ Smart Contact Directory with Intelligent Search functionality
 ## Tech Stack
 - Flask APIs for backend
 - Simple Jinja supported HTML CSS frontend
-- MongoDB for persistent storage
+- SQLite3 for persistent storage
 
 ## Scope
 - basic contact details: name, phone number, email
