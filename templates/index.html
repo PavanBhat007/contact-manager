@@ -10,15 +10,30 @@ content %}
         >
             <div class="input-field">
                 <label>Name</label>
-                <input type="text" id="name" name="name" placeholder="Enter contact name" />
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter contact name"
+                />
             </div>
             <div class="input-field">
                 <label>Phone</label>
-                <input type="text" id="phone" name="phone" placeholder="Enter contact number" />
+                <input
+                    type="text"
+                    id="phone"
+                    name="phone"
+                    placeholder="Enter contact number"
+                />
             </div>
             <div class="input-field">
                 <label>Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter contact email" />
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter contact email"
+                />
             </div>
 
             <button class="btn-submit" type="submit">Add to Contacts</button>
@@ -26,13 +41,17 @@ content %}
     </div>
 
     <div class="container">
-        <input
-            type="text"
-            id="searchbar"
-            name="searchbar"
-            class="searchbar"
-            placeholder="Search Contacts"
-        />
+        <form class="search-form" method="GET" action="{{ url_for('home') }}">
+            <input
+                type="text"
+                id="searchbar"
+                name="q"
+                class="searchbar"
+                placeholder="Search Contacts"
+                value="{{ query }}"
+            />
+            <button type="submit" class="btn-search">Search</button>
+        </form>
     </div>
 
     <div class="container">
@@ -45,16 +64,26 @@ content %}
             {% for contact in contacts %}
             <div class="contact">
                 <div class="flex-col-container">
-                    <p class="contact-name">{{ contact.name }}</p>
+                    <p class="contact-name">
+                        {% for char in contact['name'] %}
+                            {% if char.lower() in query.lower() %}
+                            <span class="highlight">{{ char }}</span>
+                            {% else %}
+                            <span>{{ char }}</span>
+                            {% endif %}
+                        {% endfor %}
+                    </p>
                     {% if contact.email %}
-                    <p class="contact-email">{{ contact.email }}</p>
+                    <p class="contact-email">{{ contact['email'] }}</p>
                     {% else %}
                     <p class="contact-email null-msg">No Email</p>
                     {% endif %}
                 </div>
-                <p class="contact-phone">{{ contact.phone }}</p>
+                <p class="contact-phone">{{ contact['phone'] }}</p>
 
-                <form method="POST" action="{{ url_for('delete_contact', id=contact.id) }}"
+                <form
+                    method="POST"
+                    action="{{ url_for('delete_contact', id=contact.id) }}"
                     onsubmit="return confirm('Delete contact: {{ contact.name }}?');"
                 >
                     <button class="btn-delete" type="submit">X</button>
