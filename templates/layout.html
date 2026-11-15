@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+    <head>
+        <title>
+            Contact Manager |
+            {% block title %}
+                <!-- Page titles (Contact Manager | {title}) -->
+            {% endblock %}
+        </title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"
+    </head>
+    <body>
+        <header>
+            <nav class="navbar">
+                <p class="brand">Contact Manager</p>
+            </nav>
+        </header>
+        
+        <hr />
+
+        <main>
+            {% block content %}
+                <!-- Page content dynamically added here -->
+            {% endblock %}
+        </main>
+
+        {% block script %}
+            <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>
