@@ -40,3 +40,7 @@ Thumbs.db
 # DB
 database.db
 *.db
+venv/*
+venv/
+
+__pycache__
